@@ -4,26 +4,49 @@
 <h1>Hello World</h1>
 <p>I'm hosted with GitHub Pages.</p>
   
-<div id="CounterVisitor">
-</div>
-
 <script>
-var n = localStorage.getItem('on_load_counter');
+  
+//get call
+ function send()
+{
 
-if (n === null) {
-  n = 0;
-}
-n++;
+      var xhr = new XMLHttpRequest();
 
-localStorage.setItem("on_load_counter", n);
+xhr.open("GET", "https://api.github.com/repos/SaravananRavi/Demo/contents/counter.txt");
+xhr.setRequestHeader("Accept", "application/vnd.github.v3+json");
+xmlhttp.setRequestHeader('Authorization', 'Basic U2FyYXZhbmFuUmF2aTpHaXRodWJTYXJhbjE='); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+xhr.send();
+  var response=xmlhttp.responseText;
+  console.log(response.content);
+var content = response.content;
+  content=content.substr(0, str.length-2);
+  var decodedString = atob(content);
+console.log(decodedString);
 
-nums = n.toString().split('').map(Number);
-document.getElementById('CounterVisitor').innerHTML = '';
-for (var i of nums) {
-  document.getElementById('CounterVisitor').innerHTML += '<span class="counter-item">' + i + '</span>';
+  //from response get content
+  //convert to decode
+  //add 1 
+n=decodedString+1;
+ document.getElementById("div").innerHTML = n;
+
+
+  //value encode to base64
+  // Decode the String
+var decodedString = atob(encodedString);
+console.log(decodedString);
+//update
+  document.getElementById("div2").innerHTML = decodedString;
+ 
+  
+  
+
 }
 
 </script>
-  
+ <body id='bod'><button type="submit" onclick="javascript:send()">call</button>
+<div id='div'>
+</div>
+   <div id='div2'>
+</div>
 </body>
 </html>
